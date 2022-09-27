@@ -1,0 +1,14 @@
+kind: HTTPScaledObject
+apiVersion: http.keda.sh/v1alpha1
+metadata:
+    name: {{ include "quarkus-rest-server.fullname" . }}
+spec:
+    host: {{ .Values.host }}
+    targetPendingRequests: {{ .Values.targetPendingRequests }}
+    scaleTargetRef:
+        deployment: quarkus-rest-server
+        service: quarkus-rest-server
+        port: 8080
+    replicas:
+        min: 0
+        max: 5    
